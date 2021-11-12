@@ -21,7 +21,7 @@ export default defineComponent({
     const doodleControl = useDoodle();
     const voice = speechSynthesis;
     const voices = ref<Voice[]>([]);
-    const langs = ref(new Set());
+    const langs = ref<string>(new Set());
     const speakers = ref([]);
     const activeVoice = ref<Voice>(null);
     const activeLang = ref("");
@@ -85,7 +85,7 @@ export default defineComponent({
 
 <template>
   <Speak class="icon speech-selector" v-if="false" />
-  <section @keydown.esc="closeLangs" v-if="false">
+  <section @keydown.esc="closeLangs">
     <button type="button" class="lang-select" @click="toggleLangs">
       <Lang class="icon lang-selector" />
     </button>
@@ -250,7 +250,7 @@ export default defineComponent({
   max-width: max-content;
   background: $champagne;
   color: $rich;
-  padding: 1rem;
+  padding: 2rem;
   border-radius: 1rem;
 
   &--dark {
