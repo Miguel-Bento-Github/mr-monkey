@@ -1,4 +1,5 @@
 import { ref, watch } from "vue";
+import { useScreenQuery } from "./useScreenQuery";
 
 interface Doodle extends HTMLElement {
   update: () => null;
@@ -11,7 +12,8 @@ export const useDoodle = () => {
 
   watch(isBackgroundActive, () => {
     const background = document.getElementById("background");
-    if (background) background.style.display = "initial";
+    const { matches } = useScreenQuery("(prefers-reduced-motion)");
+    if (background && !matches.value) background.classList.remove("hidden");
   });
 
   const toggleBackgroundDoodle = () => {
