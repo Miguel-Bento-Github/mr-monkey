@@ -1,16 +1,16 @@
 <!DOCTYPE html>
-<html lang="">
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
     <link rel="icon" href="<%= BASE_URL %>favicon.ico" />
-    <title><%= htmlWebpackPlugin.options.title %></title>
     <style>
-      #background {
+      .hidden {
         display: none;
       }
     </style>
+    <title><%= htmlWebpackPlugin.options.title %></title>
   </head>
   <body>
     <noscript>
@@ -20,12 +20,13 @@
         continue.</strong
       >
     </noscript>
-    <div id="background">
+    <div class="hidden" id="background">
       <style>
         css-doodle {
           --color: #e9d8a6,#f4f4f4,#94d2bd,#005f73,#001219;
           --pos: @p(0 0, 0 100%, 100% 0, 100% 100%);
           --size: calc(@r(100%) / @N * @n) calc(@r(100%) / @N * @n);
+          --background: #e9d8a6;
           --rule: (
             :doodle {
               position: fixed;
@@ -37,7 +38,7 @@
               grid-auto-flow: dense;
               grid-gap: 1vmax;
               overflow: hidden;
-              background: #e9d8a6;
+              background: var(--background);
             }
 
             :container {
@@ -123,7 +124,7 @@
           }
         }
         animation: cycle @r(4s, 8s, .1) ease infinite;
-        animation-delay: @rand(500ms);
+        animation-delay: @rand(1500ms);
       </css-doodle>
     </div>
     <div id="app"></div>
