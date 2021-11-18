@@ -1,0 +1,11 @@
+/* disable all animations and transitions if reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  css-doodle {
+    transition-duration: 0;
+  }
+}
