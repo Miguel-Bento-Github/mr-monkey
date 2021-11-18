@@ -23,19 +23,13 @@
     <div id="background">
       <style>
         css-doodle {
-          --color: #001219,#F1FAEE,#005f73,#ee9b00,#0a9396;
+          --color: #e9d8a6,#f4f4f4,#94d2bd,#005f73,#001219;
           --pos: @p(0 0, 0 100%, 100% 0, 100% 100%);
           --size: calc(@r(100%) / @N * @n) calc(@r(100%) / @N * @n);
-          --duration: 4s, 8s;
-
-          @media (prefers-reduced-motion: reduce) {
-            --duration: 0;
-          }
-
           --rule: (
             :doodle {
               position: fixed;
-              top: 0;
+              top 0;
               left: 0;
               @grid: 1x120 / 100vw 100vh;
               grid-template: auto / repeat(auto-fill, @r(2vmax));
@@ -43,7 +37,7 @@
               grid-auto-flow: dense;
               grid-gap: 1vmax;
               overflow: hidden;
-              background: @p(var(--color));
+              background: #e9d8a6;
             }
 
             :container {
@@ -63,6 +57,7 @@
               )
               @var(--pos1) / @r(100%) @lr
               no-repeat,
+
               @m(@r8, (
                 linear-gradient(@p(var(--color)), @lp)
                 @var(--pos1) / var(--size)
@@ -99,35 +94,36 @@
                   @r(100%) @r(100%) / @r(2px, 5px) @lr
                   @p(round, space);
             }
-            animation: cycle @r(var(--duration), .1) linear infinite;
           );
         }
       </style>
-      <css-doodle use="var(--rule)">
-              @keyframes cycle {
-                to {
-                  background: radial-gradient(
-                    circle at var(--pos),
-                    @stripe(transparent, @p(var(--color)) 1px, transparent)
-                  )
-                  @var(--pos1) / @r(100%) @lr no-repeat,
-                  @m(@r8, (
-                    linear-gradient(@p(var(--color)), @lp)
-                    @var(--pos1) / var(--size)
-                    no-repeat
-                  )),
-                  radial-gradient(
-                    circle at var(--pos),
-                    @p(var(--color)) @r(70%), #0000 0)
-                    @r(100%) @r(100%) / @r(20vmax, 50vmax) @lr
-                    @p(round, space),
-                  linear-gradient(
-                    @r(360deg),
-                    @p(var(--color)) @r(20%), #0000 0)
-                    @r(100%) @r(100%) / @r(5px, 10px) @lr
-                    @p(round, space);
-                }
-              }
+       <css-doodle use="var(--rule)">
+        @keyframes cycle {
+          to {
+            background: radial-gradient(
+              circle at var(--pos),
+              @stripe(transparent, @p(var(--color)) 1px, transparent)
+            )
+            @var(--pos1) / @r(100%) @lr no-repeat,
+            @m(@r8, (
+              linear-gradient(@p(var(--color)), @lp)
+              @var(--pos1) / var(--size)
+              no-repeat
+            )),
+            radial-gradient(
+              circle at var(--pos),
+              @p(var(--color)) @r(70%), #0000 0)
+              @r(100%) @r(100%) / @r(20vmax, 50vmax) @lr
+              @p(round, space),
+            linear-gradient(
+              @r(360deg),
+              @p(var(--color)) @r(20%), #0000 0)
+              @r(100%) @r(100%) / @r(5px, 10px) @lr
+              @p(round, space);
+          }
+        }
+        animation: cycle @r(4s, 8s, .1) ease infinite;
+        animation-delay: @rand(500ms);
       </css-doodle>
     </div>
     <div id="app"></div>
