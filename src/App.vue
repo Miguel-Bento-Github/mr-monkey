@@ -147,8 +147,9 @@ export default defineComponent({
 
 .content {
   display: flex;
-  align-items: flex-end;
-  gap: 5rem;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 2rem;
   position: relative;
   z-index: 1;
   max-width: max-content;
@@ -156,13 +157,19 @@ export default defineComponent({
   box-shadow: 1rem 1rem 4rem #a59976, -1rem -1rem 4rem #ffffd6;
   color: $rich;
   padding: 2rem;
-  margin: 6rem;
   border-radius: 1rem;
 
   @media screen and (prefers-color-scheme: dark) {
     background: linear-gradient(145deg, #00131b, #001017);
     box-shadow: 1rem 1rem 2rem #000a0e, -1rem -1rem 2rem #001a24;
     color: $champagne;
+  }
+
+  @media screen and (min-width: 768px) {
+    gap: 5rem;
+    margin: 6rem;
+    flex-direction: row;
+    align-items: flex-end;
   }
 
   &--dark {
@@ -173,9 +180,16 @@ export default defineComponent({
 }
 
 .contact {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: flex;
+  flex-direction: column;
+  width: 100%;
   gap: 1rem;
+
+  @media screen and (min-width: 768px) {
+    width: initial;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
 .contact-header {
@@ -198,6 +212,18 @@ export default defineComponent({
   height: 56px;
   width: 56px;
   padding: 0.25rem;
+
+  &:nth-child(4) {
+    align-self: flex-start;
+  }
+
+  &:nth-child(3) {
+    align-self: center;
+  }
+
+  &:nth-child(2) {
+    align-self: flex-end;
+  }
 }
 
 .doodle-wrapper {
