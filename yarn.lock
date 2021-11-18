@@ -1048,14 +1048,6 @@
     json5 "^2.2.0"
     loader-utils "^2.0.0"
 
-"@luxdamore/vue-css-doodle@^1.0.1":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@luxdamore/vue-css-doodle/-/vue-css-doodle-1.0.1.tgz#ee246579b57e293a89ff5d5f87b826e1afeee75f"
-  integrity sha512-zgJap17UBWh/mvppqn/1zz0n8FqwddgiSNAgeUYrlLpJGVE300fRJ1r6pXVT1+3FFY6Z6sPC/tg+8wKN8BNUAg==
-  dependencies:
-    css-doodle "^0.7.7"
-    vue "^2.6.11"
-
 "@mrmlnc/readdir-enhanced@^2.2.1":
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/@mrmlnc/readdir-enhanced/-/readdir-enhanced-2.2.1.tgz#524af240d1a360527b730475ecfa1344aa540dde"
@@ -3377,11 +3369,6 @@ css-doodle@^0.21.2:
   version "0.21.2"
   resolved "https://registry.yarnpkg.com/css-doodle/-/css-doodle-0.21.2.tgz#1522a6f3825b0aeb775dd7431a82d57d93368ea8"
   integrity sha512-/FT+hq9Yz2qpIePHgT+ZlyHqFMYDYi7K9ToXku7TBqFD9XHmiof8ulOr2gKMQEzFwG25f2P4cLgo+cLJC8D72Q==
-
-css-doodle@^0.7.7:
-  version "0.7.7"
-  resolved "https://registry.yarnpkg.com/css-doodle/-/css-doodle-0.7.7.tgz#df9b8fe8d7df0806fba065bdd033a472c45d1454"
-  integrity sha512-ba3ToQwkwM5rv7++4dWewsPeCzT8DCwanG9AQuXu/hKFwp4w9C0iePYQtgoXYOdm3G+G6YqnHcO7qmJqeNWHow==
 
 css-loader@^3.5.3:
   version "3.6.0"

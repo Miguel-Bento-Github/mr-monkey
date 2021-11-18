@@ -1,4 +1,4 @@
-import { ref } from "vue";
+import { ref, watch } from "vue";
 
 interface Doodle extends HTMLElement {
   update: () => null;
@@ -9,8 +9,14 @@ export const useDoodle = () => {
   const isBackgroundActive = ref(false);
   let doodleIntervalID: number;
 
+  watch(isBackgroundActive, () => {
+    const background = document.getElementById("background");
+    if (background) background.style.display = "initial";
+  });
+
   const toggleBackgroundDoodle = () => {
     isBackgroundActive.value = true;
+    updateDoodle();
   };
 
   const updateDoodle = () => {

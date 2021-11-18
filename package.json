@@ -9,7 +9,6 @@
     "i18n:report": "vue-cli-service i18n:report --src \"./src/**/*.?(js|vue)\" --locales \"./src/locale/**/*.json\""
   },
   "dependencies": {
-    "@luxdamore/vue-css-doodle": "^1.0.1",
     "core-js": "^3.6.5",
     "css-doodle": "^0.21.2",
     "register-service-worker": "^1.7.1",
