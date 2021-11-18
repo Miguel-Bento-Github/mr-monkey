@@ -4,18 +4,33 @@ import Github from "@/component/icon/Github.vue";
 import LinkedIn from "@/component/icon/Linked.vue";
 import "css-doodle";
 import { useDoodle } from "@/hook/useDoodle";
+import Email from "./component/icon/Email.vue";
+import { useScreenQuery } from "./hook/useScreenQuery";
 
 export default defineComponent({
   components: {
     Github,
     LinkedIn,
+    Email,
   },
   setup() {
     const content = ref(document.createElement("div"));
     const doodleControl = useDoodle();
 
+    const { matches: isDark } = useScreenQuery("(prefers-color-scheme: dark)");
+
+    if (isDark.value) {
+      const doodle = document.querySelector("css-doodle") as HTMLElement;
+      doodle?.style.setProperty("--background", "#001219");
+    }
+
+    const { matches: reduceMotion } = useScreenQuery(
+      "(prefers-reduced-motion)"
+    );
+
     return {
       content,
+      reduceMotion,
       ...doodleControl,
     };
   },
@@ -29,43 +44,40 @@ export default defineComponent({
     itemscope
     itemtype="https://schema.org/Person"
   >
-    <pre aria-disabled="true">></pre>
     <header>
+      <pre aria-disabled="true">></pre>
       <h1 itemprop="name">Bento</h1>
+      <h2 itemprop="jobTitle">Frontend Developer</h2>
     </header>
 
-    <section>
-      <h2 itemprop="jobTitle">Frontend Developer</h2>
-    </section>
-
-    <section itemprop="contactPoint" class="contact">
-      <h2 class="contact__header">Contact</h2>
-      <a tabindex="0" href="mailto:bento-miguel@outlook.com" itemprop="email"
-        >bento-miguel@outlook.com</a
+    <address itemprop="contactPoint" class="contact">
+      <h2 class="contact-header">Contact</h2>
+      <a
+        class="icon"
+        tabindex="0"
+        href="mailto:bento-miguel@outlook.com"
+        itemprop="email"
       >
+        <Email />
+      </a>
+      <a
+        class="icon"
+        tabindex="0"
+        href="https://github.com/Miguel-Bento-Github"
+        itemprop="url"
+      >
+        <Github aria-label="github" />
+      </a>
 
-      <figure>
-        <a
-          tabindex="0"
-          href="https://github.com/Miguel-Bento-Github"
-          itemprop="url"
-        >
-          <figcaption>GitHub</figcaption>
-          <Github class="icon" />
-        </a>
-      </figure>
-
-      <figure>
-        <a
-          tabindex="0"
-          href="https://www.linkedin.com/in/miguel-angelo-bento/"
-          itemprop="url"
-        >
-          <figcaption>LinkedIn</figcaption>
-          <LinkedIn class="icon" />
-        </a>
-      </figure>
-    </section>
+      <a
+        class="icon"
+        tabindex="0"
+        href="https://www.linkedin.com/in/miguel-angelo-bento/"
+        itemprop="url"
+      >
+        <LinkedIn aria-label="linkedIn" />
+      </a>
+    </address>
   </main>
 
   <transition name="fade">
@@ -78,7 +90,7 @@ export default defineComponent({
       @click="toggleBackgroundDoodle()"
     >
       <css-doodle
-        @mouseenter="updateDoodle"
+        @mouseenter="!reduceMotion && updateDoodle()"
         @mouseleave="clearDoodle"
         class="doodle"
         ref="doodle"
@@ -91,7 +103,7 @@ export default defineComponent({
           border-radius: @pick(100% 0, 0 100%);
           transform: scale(@r(.25, 1.25));
           background: hsla(calc(240 - 6 * @x * @y), 70%, 68%, @r.8 );
-          transition: .4s @r(.6s);
+          transition: {{ reduceMotion ? 0 : ".4s @r(.6s)" }} ;
         </pre>
       </css-doodle>
     </button>
@@ -106,6 +118,11 @@ export default defineComponent({
   height: 100vh;
   padding: 3rem;
   line-height: 1.4;
+
+  @media screen and (prefers-color-scheme: light) {
+    background: $text;
+    color: $rich;
+  }
 }
 </style>
 
@@ -129,26 +146,58 @@ export default defineComponent({
 }
 
 .content {
+  display: flex;
+  align-items: flex-end;
+  gap: 5rem;
   position: relative;
   z-index: 1;
   max-width: max-content;
-  background: $champagne;
+  background: linear-gradient(145deg, #f9e7b2, #d2c295);
+  box-shadow: 1rem 1rem 4rem #a59976, -1rem -1rem 4rem #ffffd6;
   color: $rich;
   padding: 2rem;
+  margin: 6rem;
   border-radius: 1rem;
 
+  @media screen and (prefers-color-scheme: dark) {
+    background: linear-gradient(145deg, #00131b, #001017);
+    box-shadow: 1rem 1rem 2rem #000a0e, -1rem -1rem 2rem #001a24;
+    color: $champagne;
+  }
+
   &--dark {
-    background: $rich;
+    background: linear-gradient(145deg, #00131b, #001017);
+    box-shadow: 1rem 1rem 2rem #000a0e, -1rem -1rem 2rem #001a24;
     color: $champagne;
   }
 }
 
-.contact__header {
+.contact {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.contact-header {
   display: none;
 }
 
+.icon,
+.icon-email {
+  transition: transform 0.1s ease;
+  border: 2px currentColor solid;
+  border-radius: 50%;
+
+  &:hover {
+    transition: transform 0.25s ease;
+    transform: scale(1.1);
+  }
+}
+
 .icon {
-  height: 48px;
+  height: 56px;
+  width: 56px;
+  padding: 0.25rem;
 }
 
 .doodle-wrapper {
@@ -158,8 +207,8 @@ export default defineComponent({
 
 .doodle {
   position: fixed;
-  top: 3rem;
-  right: 3rem;
+  top: -5rem;
+  right: -5rem;
   height: 350px;
   width: 350px;
   display: flex;
