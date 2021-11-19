@@ -13,7 +13,8 @@ export default defineComponent({
   <address itemprop="contactPoint" class="contact">
     <h2 class="contact-header">Contact</h2>
     <a
-      class="icon"
+      target="_blank"
+      class="icon icon-email"
       tabindex="0"
       href="mailto:bento-miguel@outlook.com"
       itemprop="email"
@@ -21,7 +22,8 @@ export default defineComponent({
       <icon-email />
     </a>
     <a
-      class="icon"
+      target="_blank"
+      class="icon icon-github"
       tabindex="0"
       href="https://github.com/Miguel-Bento-Github"
       itemprop="url"
@@ -30,7 +32,8 @@ export default defineComponent({
     </a>
 
     <a
-      class="icon"
+      target="_blank"
+      class="icon icon-linked"
       tabindex="0"
       href="https://www.linkedin.com/in/miguel-angelo-bento/"
       itemprop="url"
@@ -58,8 +61,10 @@ export default defineComponent({
   display: none;
 }
 
-.icon,
-.icon-email {
+.icon {
+  height: 48px;
+  width: 48px;
+  padding: 0.25rem;
   transition: transform 0.1s ease;
   border: 2px currentColor solid;
   border-radius: 50%;
@@ -68,23 +73,25 @@ export default defineComponent({
     transition: transform 0.25s ease;
     transform: scale(1.1);
   }
-}
 
-.icon {
-  height: 48px;
-  width: 48px;
-  padding: 0.25rem;
+  @media screen and (max-width: 768px) {
+    position: fixed;
 
-  &:nth-child(4) {
-    align-self: flex-start;
-  }
+    &:nth-child(4) {
+      bottom: 3rem;
+      left: 3rem;
+    }
 
-  &:nth-child(3) {
-    align-self: center;
-  }
+    &:nth-child(3) {
+      bottom: 3rem;
+      left: 50%;
+      transform: translateX(-50%);
+    }
 
-  &:nth-child(2) {
-    align-self: flex-end;
+    &:nth-child(2) {
+      bottom: 3rem;
+      right: 3rem;
+    }
   }
 }
 </style>

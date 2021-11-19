@@ -125,16 +125,22 @@ body {
   position: relative;
   color: inherit;
   cursor: pointer;
+  height: 32px;
+  width: 32px;
+  margin-left: -0.5rem;
 
   &--disabled {
     cursor: initial;
   }
 
   &-text {
+    line-height: 1;
+  }
+
+  &-circle {
     position: absolute;
     top: 0;
-    left: 50%;
-    transform: translateX(-50%);
+    left: 0;
   }
 }
 

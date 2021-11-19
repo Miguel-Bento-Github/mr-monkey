@@ -13,7 +13,13 @@ export const useDoodle = () => {
   watch(isBackgroundActive, () => {
     const background = document.getElementById("background");
     const { matches } = useScreenQuery("(prefers-reduced-motion)");
-    if (background && !matches.value) background.classList.remove("hidden");
+    if (background && !matches.value) {
+      background.classList.remove("hidden");
+
+      setTimeout(() => {
+        background.classList.add("appear");
+      }, 250);
+    }
   });
 
   const toggleBackgroundDoodle = () => {

@@ -9,6 +9,14 @@
       .hidden {
         display: none;
       }
+      .background {
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity .25s ease-out;
+      }
+      .appear {
+        opacity: 1;
+      }
     </style>
     <title><%= htmlWebpackPlugin.options.title %></title>
   </head>
@@ -20,7 +28,7 @@
         continue.</strong
       >
     </noscript>
-    <div class="hidden" id="background">
+    <div class="background hidden" id="background">
       <style>
         css-doodle {
           --color: #e9d8a6,#f4f4f4,#94d2bd,#005f73,#001219;
