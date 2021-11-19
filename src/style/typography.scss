@@ -10,15 +10,16 @@ h6 {
 }
 
 h1 {
-  @include fluid(18px, 38px);
+  @include fluid(22px, 38px);
+  line-height: 2;
 }
 
 h2 {
-  @include fluid(16px, 32px);
+  @include fluid(20px, 32px);
 }
 
 pre {
-  @include fluid(16px, 32px);
+  @include fluid(20px, 32px);
 }
 
 a {

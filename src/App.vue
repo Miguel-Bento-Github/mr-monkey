@@ -111,10 +111,17 @@ export default defineComponent({
 </template>
 
 <style lang="scss">
+html,
+body {
+  background: $rich;
+  min-height: max-content;
+}
+
 #app {
   font-family: $overpass;
   background: $rich;
   color: $text;
+  min-height: max-content;
   height: 100vh;
   padding: 3rem;
   line-height: 1.4;
@@ -152,12 +159,12 @@ export default defineComponent({
   gap: 2rem;
   position: relative;
   z-index: 1;
-  max-width: max-content;
   background: linear-gradient(145deg, #f9e7b2, #d2c295);
   box-shadow: 1rem 1rem 4rem #a59976, -1rem -1rem 4rem #ffffd6;
   color: $rich;
   padding: 2rem;
   border-radius: 1rem;
+  width: max-content;
 
   @media screen and (prefers-color-scheme: dark) {
     background: linear-gradient(145deg, #00131b, #001017);
@@ -169,7 +176,16 @@ export default defineComponent({
     gap: 5rem;
     margin: 6rem;
     flex-direction: row;
+    max-width: max-content;
     align-items: flex-end;
+  }
+
+  @media screen and (orientation: landscape) and (max-width: 768px) {
+    gap: 5rem;
+    flex-direction: row;
+    height: max-content;
+    width: max-content;
+    align-items: flex-start;
   }
 
   &--dark {
@@ -183,9 +199,9 @@ export default defineComponent({
   display: flex;
   flex-direction: column;
   width: 100%;
-  gap: 1rem;
 
   @media screen and (min-width: 768px) {
+    gap: 1rem;
     width: initial;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -209,8 +225,8 @@ export default defineComponent({
 }
 
 .icon {
-  height: 56px;
-  width: 56px;
+  height: 48px;
+  width: 48px;
   padding: 0.25rem;
 
   &:nth-child(4) {
