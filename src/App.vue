@@ -1,21 +1,20 @@
 <script lang="ts">
 import { defineComponent, ref } from "vue";
-import Github from "@/component/icon/Github.vue";
-import LinkedIn from "@/component/icon/Linked.vue";
 import "css-doodle";
 import { useDoodle } from "@/hook/useDoodle";
-import Email from "./component/icon/Email.vue";
 import { useScreenQuery } from "./hook/useScreenQuery";
+import Contact from "./component/Contact.vue";
+import IconCircle from "./component/icon/Circle.vue";
 
 export default defineComponent({
   components: {
-    Github,
-    LinkedIn,
-    Email,
+    Contact,
+    IconCircle,
   },
   setup() {
     const content = ref(document.createElement("div"));
     const doodleControl = useDoodle();
+    const isCircleActive = ref(false);
 
     const { matches: isDark } = useScreenQuery("(prefers-color-scheme: dark)");
 
@@ -31,6 +30,7 @@ export default defineComponent({
     return {
       content,
       reduceMotion,
+      isCircleActive,
       ...doodleControl,
     };
   },
@@ -45,39 +45,23 @@ export default defineComponent({
     itemtype="https://schema.org/Person"
   >
     <header>
-      <pre aria-disabled="true">></pre>
+      <button
+        class="non-button"
+        :class="{ 'non-button--disabled': isBackgroundActive }"
+        type="button"
+        :disabled="isBackgroundActive"
+        aria-label="change background"
+        @click="toggleBackgroundDoodle()"
+        @mouseenter="isCircleActive = true"
+        @mouseleave="!isBackgroundActive && (isCircleActive = false)"
+      >
+        <pre class="non-button-text">></pre>
+        <icon-circle :isActive="isCircleActive" class="non-button-circle" />
+      </button>
       <h1 itemprop="name">Bento</h1>
       <h2 itemprop="jobTitle">Frontend Developer</h2>
     </header>
-
-    <address itemprop="contactPoint" class="contact">
-      <h2 class="contact-header">Contact</h2>
-      <a
-        class="icon"
-        tabindex="0"
-        href="mailto:bento-miguel@outlook.com"
-        itemprop="email"
-      >
-        <Email />
-      </a>
-      <a
-        class="icon"
-        tabindex="0"
-        href="https://github.com/Miguel-Bento-Github"
-        itemprop="url"
-      >
-        <Github aria-label="github" />
-      </a>
-
-      <a
-        class="icon"
-        tabindex="0"
-        href="https://www.linkedin.com/in/miguel-angelo-bento/"
-        itemprop="url"
-      >
-        <LinkedIn aria-label="linkedIn" />
-      </a>
-    </address>
+    <contact />
   </main>
 
   <transition name="fade">
@@ -134,22 +118,24 @@ body {
 </style>
 
 <style lang="scss" scoped>
-.doodle-wrapper {
-  transition: all 0.2s ease-out;
-}
+@use "@/style/mixin/_fluid.scss" as *;
 
-.language-options {
-  background: $rich;
-  z-index: 3;
-  position: fixed;
-  top: 3rem;
-  left: 3rem;
-}
-
-.language-option {
-  border-radius: 1rem;
-  box-shadow: 0 0 2px $middle;
+.non-button {
+  padding: 0;
+  position: relative;
   color: inherit;
+  cursor: pointer;
+
+  &--disabled {
+    cursor: initial;
+  }
+
+  &-text {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+  }
 }
 
 .content {
@@ -195,53 +181,6 @@ body {
   }
 }
 
-.contact {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-
-  @media screen and (min-width: 768px) {
-    gap: 1rem;
-    width: initial;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-.contact-header {
-  display: none;
-}
-
-.icon,
-.icon-email {
-  transition: transform 0.1s ease;
-  border: 2px currentColor solid;
-  border-radius: 50%;
-
-  &:hover {
-    transition: transform 0.25s ease;
-    transform: scale(1.1);
-  }
-}
-
-.icon {
-  height: 48px;
-  width: 48px;
-  padding: 0.25rem;
-
-  &:nth-child(4) {
-    align-self: flex-start;
-  }
-
-  &:nth-child(3) {
-    align-self: center;
-  }
-
-  &:nth-child(2) {
-    align-self: flex-end;
-  }
-}
-
 .doodle-wrapper {
   background: transparent;
   border: none;
@@ -260,6 +199,11 @@ body {
   border-radius: 50%;
   overflow: hidden;
   opacity: 0.7;
+
+  &:hover {
+    filter: hue-rotate(-1.142rad);
+    transition: filter 0.25s ease-in-out;
+  }
 }
 
 .fade-enter-active,
