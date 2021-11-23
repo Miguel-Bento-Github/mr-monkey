@@ -2,9 +2,10 @@
 import { defineComponent, ref } from "vue";
 import "css-doodle";
 import { useDoodle } from "@/hook/useDoodle";
-import { useScreenQuery } from "./hook/useScreenQuery";
-import Contact from "./component/Contact.vue";
-import IconCircle from "./component/icon/Circle.vue";
+import { useScreenQuery } from "@/hook/useScreenQuery";
+import { useDarkTheme } from "@/hook/useDarkTheme";
+import Contact from "@/component/Contact.vue";
+import IconCircle from "@/component/icon/Circle.vue";
 
 export default defineComponent({
   components: {
@@ -15,8 +16,7 @@ export default defineComponent({
     const content = ref(document.createElement("div"));
     const doodleControl = useDoodle();
     const isCircleActive = ref(false);
-
-    const { matches: isDark } = useScreenQuery("(prefers-color-scheme: dark)");
+    const { isDark } = useDarkTheme();
 
     if (isDark.value) {
       const doodle = document.querySelector("css-doodle") as HTMLElement;
@@ -55,7 +55,11 @@ export default defineComponent({
         @mouseenter="isCircleActive = true"
         @mouseleave="!isBackgroundActive && (isCircleActive = false)"
       >
-        <pre class="non-button-text">></pre>
+        <!-- prettier-ignore -->
+        <pre
+          class="non-button-text"
+          :class="{ 'non-button-text--active': isCircleActive }"
+        >></pre>
         <icon-circle :isActive="isCircleActive" class="non-button-circle" />
       </button>
       <h1 itemprop="name">Bento</h1>
@@ -95,6 +99,8 @@ export default defineComponent({
 </template>
 
 <style lang="scss">
+@use "@/style/mixin/_color-scheme.scss" as *;
+
 html,
 body {
   background: $rich;
@@ -103,22 +109,19 @@ body {
 
 #app {
   font-family: $overpass;
-  background: $rich;
-  color: $text;
   min-height: max-content;
   height: 100vh;
   padding: 3rem;
   line-height: 1.4;
 
-  @media screen and (prefers-color-scheme: light) {
-    background: $text;
-    color: $rich;
-  }
+  @include color-scheme;
 }
 </style>
 
 <style lang="scss" scoped>
 @use "@/style/mixin/_fluid.scss" as *;
+@use "@/style/mixin/_neu.scss" as *;
+@use "@/style/mixin/_color-scheme.scss" as *;
 
 .non-button {
   padding: 0;
@@ -128,19 +131,41 @@ body {
   height: 32px;
   width: 32px;
   margin-left: -0.5rem;
+  border-radius: 50%;
 
   &--disabled {
     cursor: initial;
   }
 
   &-text {
+    z-index: 1;
     line-height: 1;
+    position: relative;
+    transition: transform 0.25s 0.25s ease-in-out;
+
+    &--active {
+      transform: rotateZ(-90deg);
+    }
   }
 
   &-circle {
     position: absolute;
     top: 0;
     left: 0;
+    border-radius: 50%;
+
+    &::before {
+      z-index: 0;
+      content: "";
+      display: inline-block;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      border-radius: 50%;
+      @include neu(0.5rem, 1.5rem);
+      @include color-scheme;
+    }
   }
 }
 
@@ -151,18 +176,10 @@ body {
   gap: 2rem;
   position: relative;
   z-index: 1;
-  background: linear-gradient(145deg, #f9e7b2, #d2c295);
-  box-shadow: 1rem 1rem 4rem #a59976, -1rem -1rem 4rem #ffffd6;
-  color: $rich;
   padding: 2rem;
   border-radius: 1rem;
   width: max-content;
-
-  @media screen and (prefers-color-scheme: dark) {
-    background: linear-gradient(145deg, #00131b, #001017);
-    box-shadow: 1rem 1rem 2rem #000a0e, -1rem -1rem 2rem #001a24;
-    color: $champagne;
-  }
+  @include neu;
 
   @media screen and (min-width: 768px) {
     gap: 5rem;

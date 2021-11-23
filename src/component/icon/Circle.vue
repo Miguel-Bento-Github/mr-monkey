@@ -20,8 +20,8 @@ export default defineComponent({
   >
     <circle
       fill="none"
-      stroke-width="2px"
       stroke="currentColor"
+      stroke-width="2px"
       stroke-dasharray="88px"
       stroke-dashoffset="88px"
       class="circle"

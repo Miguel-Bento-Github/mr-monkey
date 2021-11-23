@@ -1,0 +1,11 @@
+@use "@/style/_color.scss" as *;
+
+@mixin color-scheme {
+  background: $rich;
+  color: $champagne;
+
+  @media screen and (prefers-color-scheme: light) {
+    background: $champagne;
+    color: $rich;
+  }
+}

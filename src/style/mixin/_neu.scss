@@ -1,0 +1,13 @@
+@use "sass:math";
+@use "@/style/_color.scss" as *;
+
+@mixin neu($xy: 1rem, $blur: 4rem) {
+  background: linear-gradient(145deg, #f9e7b2, #d2c295);
+  box-shadow: $xy $xy $blur #a59976, -#{$xy} -#{$xy} $blur #f8f8ce;
+
+  @media screen and (prefers-color-scheme: dark) {
+    background: linear-gradient(145deg, #00131b, #001017);
+    box-shadow: $xy $xy math.div($blur, 2) #000a0e,
+      -#{$xy} -#{$xy} math.div($blur, 2) #001a24;
+  }
+}
