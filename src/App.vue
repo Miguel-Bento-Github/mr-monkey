@@ -144,7 +144,7 @@ body {
     transition: transform 0.25s 0.25s ease-in-out;
 
     &--active {
-      transform: rotateZ(-90deg);
+      transform: rotateZ(-90deg) translateY(-5%);
     }
   }
 
