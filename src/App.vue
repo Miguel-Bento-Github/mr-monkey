@@ -55,12 +55,29 @@ export default defineComponent({
         @mouseenter="isCircleActive = true"
         @mouseleave="!isBackgroundActive && (isCircleActive = false)"
       >
-        <!-- prettier-ignore -->
-        <pre
+        <svg
           class="non-button-text"
-          :class="{ 'non-button-text--active': isCircleActive }"
-        >></pre>
-        <icon-circle :isActive="isCircleActive" class="non-button-circle" />
+          :class="{
+            'non-button-text--active': isCircleActive || isBackgroundActive,
+          }"
+          fill="currentColor"
+          xmlns="http://www.w3.org/2000/svg"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          version="1.1"
+          x="0px"
+          y="0px"
+          viewBox="0 0 100 100"
+          style="enable-background: new 0 0 100 100"
+          xml:space="preserve"
+        >
+          <polygon
+            points="30,70.3 70,54.3 70,45.7 30,29.7 30,38.3 59.2,50 30,61.7  "
+          ></polygon>
+        </svg>
+        <icon-circle
+          :isActive="isCircleActive || isBackgroundActive"
+          class="non-button-circle"
+        />
       </button>
       <h1 itemprop="name">Bento</h1>
       <h2 itemprop="jobTitle">Frontend Developer</h2>
@@ -139,13 +156,10 @@ body {
   }
 
   &-text {
-    z-index: 1;
-    line-height: 1;
-    position: relative;
     transition: transform 0.25s 0.25s ease-in-out;
 
     &--active {
-      transform: rotateZ(-90deg) translateY(-5%);
+      transform: rotate(-90deg);
     }
   }
 
