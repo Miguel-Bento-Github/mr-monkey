@@ -71,7 +71,8 @@ export default defineComponent({
   <transition name="fade">
     <button
       aria-live="polite"
-      tabindex="0"
+      aria-label="change background"
+      tabindex="-1"
       key="poster"
       v-if="!isBackgroundActive"
       class="doodle-wrapper"
