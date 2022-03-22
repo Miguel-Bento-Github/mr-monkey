@@ -1,6 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <meta name="Description" content="This is Miguel Bento portfolio." />
+    <link
+      rel="apple-touch-icon"
+      href="<%= BASE_URL %>img/icons/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="<%= BASE_URL %>img/icons/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="<%= BASE_URL %>img/icons/favicon-16x16.png"
+    />
+    <link
+      rel="mask-icon"
+      href="<%= BASE_URL %>img/icons/safari-pinned-tab.svg"
+      color="#5bbad5"
+    />
+    <meta name="msapplication-TileColor" content="#da532c" />
+    <meta name="theme-color" content="#ffffff" />
+    <link rel="manifest" href="./site.webmanifest" />
+    <title>Miguel Bento</title>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
@@ -12,13 +38,13 @@
       .background {
         opacity: 0;
         pointer-events: none;
-        transition: opacity .25s ease-out;
+        transition: opacity 0.25s ease-out;
       }
       .appear {
         opacity: 1;
       }
     </style>
-    <title><%= htmlWebpackPlugin.options.title %></title>
+    <title>Bento, Frontend Developer</title>
   </head>
   <body>
     <noscript>
@@ -28,113 +54,74 @@
         continue.</strong
       >
     </noscript>
-    <div class="background hidden" id="background">
+    <div
+      role="img"
+      aria-label="An experimental background with moving parts and visual noise"
+      class="background hidden"
+      id="background"
+    >
       <style>
         css-doodle {
-          --color: #e9d8a6,#f4f4f4,#94d2bd,#005f73,#001219;
-          --pos: @p(0 0, 0 100%, 100% 0, 100% 100%);
-          --size: calc(@r(100%) / @N * @n) calc(@r(100%) / @N * @n);
+          --color: #e9d8a6, #f4f4f4, #94d2bd, #005f73, #001219;
+          --pos: @p (0 0, 0 100%, 100% 0, 100% 100%);
+          --size: calc(@r (100%) / @N * @n) calc(@r (100%) / @N * @n);
           --background: #e9d8a6;
           --rule: (
-            :doodle {
-              position: fixed;
-              top 0;
-              left: 0;
-              @grid: 1x120 / 100vw 100vh;
-              grid-template: auto / repeat(auto-fill, @r(2vmax));
-              grid-auto-rows: @lr;
-              grid-auto-flow: dense;
-              grid-gap: 1vmax;
-              overflow: hidden;
-              background: var(--background);
-            }
-
-            :container {
-              @size: 105%;
-            }
-
-            --pos1: var(--pos);
-            --pos2: var(--pos);
-
-            grid-column-end: span @ri(12);
-            grid-row-end: span @ri(18);
-
-            background:
-              radial-gradient(
+            : doodle {position: fixed; top 0; left: 0; @grid: 1x120 / 100vw
+              100vh; grid-template: auto / repeat(auto-fill, @r (2vmax)) ;
+              grid-auto-rows: @lr; grid-auto-flow: dense; grid-gap: 1vmax;
+              overflow: hidden; background: var(--background) ;}: container {@size:
+              105%;} --pos1: var(--pos) ; --pos2: var(--pos) ; grid-column-end: span
+              @ri (12) ; grid-row-end: span @ri (18) ; background: radial-gradient(
                 circle at var(--pos),
-                @stripe(transparent, @p(var(--color)) 1px, transparent)
+                @stripe (transparent, @p (var(--color)) 1px, transparent)
+              ) @var (--pos1) / @r (100%) @lr no-repeat,
+            @m
+              (
+                @r8,
+                (
+                  linear-gradient(@p (var(--color)), @lp) @var (--pos1) /
+                    var(--size) no-repeat
+                )
+              ),
+            radial-gradient(
+                circle at var(--pos),
+                @p (var(--color)) @r (70%),
+                #0000 0
               )
-              @var(--pos1) / @r(100%) @lr
-              no-repeat,
-
-              @m(@r8, (
-                linear-gradient(@p(var(--color)), @lp)
-                @var(--pos1) / var(--size)
-                no-repeat
-              )),
-              radial-gradient(
+              @r (100%) @r (100%) / @r (20vmax, 50vmax) @lr @p (round, space),
+            linear-gradient(@r (360deg), @p (var(--color)) @r (20%), #0000 0) @r
+              (100%) @r (100%) / @r (5px, 10px) @lr @p (round, space) ;: after,
+            : before {content: "" ; @size: @r (100%) ; background: @m
+              (
+                @r2,
+                (
+                  linear-gradient(@p (var(--color)), @lp) @var (--pos2) /
+                    var(--size) no-repeat
+                )
+              ),
+            radial-gradient(
                 circle at var(--pos),
-                @p(var(--color)) @r(70%), #0000 0)
-                @r(100%) @r(100%) / @r(20vmax, 50vmax) @lr
-                @p(round, space),
-              linear-gradient(
-                @r(360deg),
-                @p(var(--color)) @r(20%), #0000 0)
-                @r(100%) @r(100%) / @r(5px, 10px) @lr
-                @p(round, space);
-
-            :after, :before {
-              content: '';
-              @size: @r(100%);
-              background:
-                @m(@r2, (
-                  linear-gradient(@p(var(--color)), @lp)
-                  @var(--pos2) / var(--size)
-                  no-repeat
-                )),
-                radial-gradient(
-                  circle at var(--pos),
-                  @p(var(--color)) @r(70%), #0000 0)
-                  @r(100%) @r(100%) / @r(5vmax, 25vmax) @lr
-                  @p(round, space),
-                linear-gradient(
-                  @r(360deg),
-                  @p(var(--color)) @r(20%), #0000 0)
-                  @r(100%) @r(100%) / @r(2px, 5px) @lr
-                  @p(round, space);
-            }
+                @p (var(--color)) @r (70%),
+                #0000 0
+              )
+              @r (100%) @r (100%) / @r (5vmax, 25vmax) @lr @p (round, space),
+            linear-gradient(@r (360deg), @p (var(--color)) @r (20%), #0000 0) @r
+              (100%) @r (100%) / @r (2px, 5px) @lr @p (round, space) ;}
           );
         }
       </style>
-       <css-doodle use="var(--rule)">
-        @keyframes cycle {
-          to {
-            background: radial-gradient(
-              circle at var(--pos),
-              @stripe(transparent, @p(var(--color)) 1px, transparent)
-            )
-            @var(--pos1) / @r(100%) @lr no-repeat,
-            @m(@r8, (
-              linear-gradient(@p(var(--color)), @lp)
-              @var(--pos1) / var(--size)
-              no-repeat
-            )),
-            radial-gradient(
-              circle at var(--pos),
-              @p(var(--color)) @r(70%), #0000 0)
-              @r(100%) @r(100%) / @r(20vmax, 50vmax) @lr
-              @p(round, space),
-            linear-gradient(
-              @r(360deg),
-              @p(var(--color)) @r(20%), #0000 0)
-              @r(100%) @r(100%) / @r(5px, 10px) @lr
-              @p(round, space);
-          }
-        }
-
-        animation: cycle @r(4s, 8s, .1) ease infinite;
-        -webkit-animation: cycle @r(4s, 8s, .1) ease infinite;
-        animation-delay: @rand(1500ms);
+      <css-doodle use="var(--rule)">
+        @keyframes cycle { to { background: radial-gradient( circle at
+        var(--pos), @stripe(transparent, @p(var(--color)) 1px, transparent) )
+        @var(--pos1) / @r(100%) @lr no-repeat, @m(@r8, (
+        linear-gradient(@p(var(--color)), @lp) @var(--pos1) / var(--size)
+        no-repeat )), radial-gradient( circle at var(--pos), @p(var(--color))
+        @r(70%), #0000 0) @r(100%) @r(100%) / @r(20vmax, 50vmax) @lr @p(round,
+        space), linear-gradient( @r(360deg), @p(var(--color)) @r(20%), #0000 0)
+        @r(100%) @r(100%) / @r(5px, 10px) @lr @p(round, space); } } animation:
+        cycle @r(4s, 8s, .1) ease infinite; -webkit-animation: cycle @r(4s, 8s,
+        .1) ease infinite; animation-delay: @rand(1500ms);
       </css-doodle>
     </div>
     <div id="app"></div>
